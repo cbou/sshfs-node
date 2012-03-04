@@ -1,0 +1,21 @@
+{
+  "name": "cbe-sshfs",
+  "description": "Help to mount remote filesystem through ssh",
+  "version": "0.0.1",
+  "author": "Charles Bourasseau <charles.bourasseau@gmail.com>",
+  "contributors": [
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "keywords": ["sshfs", "filesystem", "ssh", "remote"],
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:cbou/cbe-sshfs.git"
+  },
+  "main": "index",
+  "license": "closed",
+  "scripts": { "test": "./node_modules/vows/bin/vows test/*-test.js --spec" },
+  "engines": { "node": ">= 0.6.8 < 0.7.0" }
+}
