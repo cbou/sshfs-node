@@ -1,4 +1,4 @@
-cbe-sshfs
+sshfs
 ==========
 
 This module helps to mount filesystem through ssh thanks [sshfs].
