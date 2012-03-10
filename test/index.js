@@ -63,6 +63,18 @@
         return assert.isNull(err);
       }
     }
+  }).addBatch({
+    'when reading mountedpoint': {
+      topic: function() {
+        fs.readdir(prefixPath + mountPoint, this.callback);
+      },
+      'we got no error': function(err, result) {
+        assert.isNull(err);
+        assert.isFalse(u.include(result, 'root'));
+        assert.isFalse(u.include(result, 'etc'));
+        return assert.isFalse(u.include(result, 'home'));
+      }
+    }
   })["export"](module);
 
 }).call(this);

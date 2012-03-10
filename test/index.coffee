@@ -48,4 +48,15 @@ suite.addBatch(
 
     'we got no error': (err, arg2) ->
       assert.isNull err
+).addBatch(
+  'when reading mountedpoint':
+    topic: () ->
+      fs.readdir prefixPath + mountPoint, this.callback
+      return
+    'we got no error': (err, result) ->
+      assert.isNull err
+      
+      assert.isFalse u.include result, 'root'
+      assert.isFalse u.include result, 'etc'
+      assert.isFalse u.include result, 'home'
 ).export(module)
