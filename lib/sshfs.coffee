@@ -14,6 +14,9 @@ sshfs.umount = (mountpoint, tryMax, callback) ->
 
   # This method is called 10 times if the device is busy
 
+  # following errors should not be retry:
+  ##### fusermount: bad mount point /tmp/cbe/mountpoints/4f358725d5e285bb79000004: No such file or directory
+
   if arguments.length == 3
     callback = arguments[2]
     tryMax = arguments[1]
@@ -31,6 +34,7 @@ sshfs.umount = (mountpoint, tryMax, callback) ->
           sshfs.umount mountpoint, (tryMax-1), callback 
         , 1000
     else
+      sshfs.log ['umounted ' + mountpoint]
       callback null
     return
 
