@@ -4,6 +4,7 @@ sshfs = require '../index'
 path = require 'path'
 fs = require 'fs'
 wrench = require 'wrench'
+u = require 'underscore'
 
 suite = vows.describe('Try the sshfs library')
 
@@ -29,12 +30,16 @@ suite.addBatch(
     'we got no error': (err, arg2) ->
       assert.isNull err
 ).addBatch(
-  'when waiting that everything is ok':
+  'when reading mountedpoint':
     topic: () ->
-      setTimeout this.callback, 5000
+      fs.readdir prefixPath + mountPoint, this.callback
       return
-    'we got no error': () ->
-      assert.isNull null
+    'we got no error': (err, result) ->
+      assert.isNull err
+      
+      assert.isTrue u.include result, 'root'
+      assert.isTrue u.include result, 'etc'
+      assert.isTrue u.include result, 'home'
 ).addBatch(
   'when umounting a server':
     topic: () ->

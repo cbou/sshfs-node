@@ -1,5 +1,5 @@
 (function() {
-  var assert, fs, mountPoint, path, prefixPath, sshfs, suite, validHost, validUser, vows, wrench;
+  var assert, fs, mountPoint, path, prefixPath, sshfs, suite, u, validHost, validUser, vows, wrench;
 
   assert = require('assert');
 
@@ -12,6 +12,8 @@
   fs = require('fs');
 
   wrench = require('wrench');
+
+  u = require('underscore');
 
   suite = vows.describe('Try the sshfs library');
 
@@ -41,12 +43,15 @@
       }
     }
   }).addBatch({
-    'when waiting that everything is ok': {
+    'when reading mountedpoint': {
       topic: function() {
-        setTimeout(this.callback, 5000);
+        fs.readdir(prefixPath + mountPoint, this.callback);
       },
-      'we got no error': function() {
-        return assert.isNull(null);
+      'we got no error': function(err, result) {
+        assert.isNull(err);
+        assert.isTrue(u.include(result, 'root'));
+        assert.isTrue(u.include(result, 'etc'));
+        return assert.isTrue(u.include(result, 'home'));
       }
     }
   }).addBatch({
