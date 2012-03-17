@@ -31,6 +31,7 @@ sshfs.umount = (mountpoint, force, tryMax, callback) ->
   forceArg = ''
   if force
     forceArg = '-z'
+    tryMax = 0
 
   command = util.format 'fusermount -u %s %s', forceArg, mountpoint
   sshfs.exec command, (error, stdout, stderr) ->
