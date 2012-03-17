@@ -20,6 +20,7 @@ sshfs.umount = (mountpoint, force, tryMax, callback) ->
   if arguments.length == 3
     callback = arguments[2]
     force = arguments[1]
+    tryMax = 10
   else if arguments.length == 2
     callback = arguments[1]
     tryMax = 10
