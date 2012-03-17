@@ -37,7 +37,11 @@ sshfs.umount = (mountpoint, force, tryMax, callback) ->
   sshfs.exec command, (error, stdout, stderr) ->
     if error
       if tryMax == 0
+        if force 
+          callback null
+          return
         callback 'Try Max is reached'
+        return
       else
         setTimeout ()-> 
           sshfs.umount mountpoint, (tryMax-1), callback 
