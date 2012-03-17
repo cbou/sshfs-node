@@ -9,7 +9,7 @@ sshfs.mount = (user, host, mountpoint, callback) ->
   command = util.format 'sshfs -o StrictHostKeyChecking=no %s@%s:/ %s', user, host, mountpoint
   sshfs.exec command, callback
     
-sshfs.umount = (mountpoint, tryMax, callback) ->
+sshfs.umount = (mountpoint, force, tryMax, callback) ->
   #fusermount -u ssh-test
 
   # This method is called 10 times if the device is busy
@@ -19,12 +19,19 @@ sshfs.umount = (mountpoint, tryMax, callback) ->
 
   if arguments.length == 3
     callback = arguments[2]
-    tryMax = arguments[1]
-  else
-    callback = tryMax
+    force = arguments[1]
+  else if arguments.length == 2
+    callback = arguments[1]
     tryMax = 10
+    force = false
+  else if arguments.length == 1
+    return ;
 
-  command = util.format 'fusermount -u %s', mountpoint
+  forceArg = ''
+  if force
+    forceArg = '-z'
+
+  command = util.format 'fusermount -u %s %s', forceArg, mountpoint
   sshfs.exec command, (error, stdout, stderr) ->
     if error
       if tryMax == 0
