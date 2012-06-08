@@ -7,12 +7,16 @@ This module helps to mount filesystem through ssh thanks [sshfs].
 Installation
 --------
 
-not yet.
+    npm install sshfs-node
 
 Quick Start
 --------
 
-not yet.
+    // mount
+    sshfs.mount user, host, mountpoint, callback
+    
+    // unmount
+    sshfs.umount mountpoint, force, callback
 
 Running Tests
 --------
