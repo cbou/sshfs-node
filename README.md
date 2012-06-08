@@ -1,4 +1,4 @@
-sshfs
+sshfs-node
 ==========
 
 This module helps to mount filesystem through ssh thanks [sshfs].
