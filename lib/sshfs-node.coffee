@@ -5,17 +5,11 @@ fs = require 'fs'
 sshfs = {}
 
 sshfs.mount = (user, host, mountpoint, callback) ->
-  #sshfs -o StrictHostKeyChecking=no ec2-user@ec2-50-16-89-0.compute-1.amazonaws.com:/ ssh-test
   command = util.format 'sshfs -o StrictHostKeyChecking=no %s@%s:/ %s', user, host, mountpoint
   sshfs.exec command, callback
     
 sshfs.umount = (mountpoint, force, tryMax, callback) ->
-  #fusermount -u ssh-test
-
   # This method is called 10 times if the device is busy
-
-  # following errors should not be retry:
-  ##### fusermount: bad mount point /tmp/cbe/mountpoints/4f358725d5e285bb79000004: No such file or directory
 
   if arguments.length == 3
     callback = arguments[2]

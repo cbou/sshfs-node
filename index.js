@@ -1,2 +1,2 @@
 
-module.exports = require('./lib/sshfs');
+module.exports = require('./lib/sshfs-node');
