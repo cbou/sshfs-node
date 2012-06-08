@@ -18,7 +18,7 @@
     "url": "git@github.com:cbou/sshfs-node.git"
   },
   "main": "index",
-  "license": "closed",
+  "license": "MIT",
   "scripts": { "test": "./node_modules/vows/bin/vows test/*-test.js --spec" },
   "engines": { "node": ">= 0.6.8 < 0.7.0" }
 }
