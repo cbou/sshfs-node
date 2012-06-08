@@ -1,5 +1,5 @@
 {
-  "name": "sshfs",
+  "name": "sshfs-node",
   "description": "Help to mount remote filesystem through ssh.",
   "version": "0.0.1",
   "author": "Charles Bourasseau <charles.bourasseau@gmail.com>",
