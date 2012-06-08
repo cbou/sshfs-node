@@ -1,6 +1,6 @@
 {
   "name": "sshfs",
-  "description": "Help to mount remote filesystem through ssh",
+  "description": "Help to mount remote filesystem through ssh.",
   "version": "0.0.1",
   "author": "Charles Bourasseau <charles.bourasseau@gmail.com>",
   "contributors": [
@@ -15,7 +15,7 @@
   "keywords": ["sshfs", "filesystem", "ssh", "remote"],
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:cbou/cbe-sshfs.git"
+    "url": "git@github.com:cbou/sshfs-node.git"
   },
   "main": "index",
   "license": "closed",
