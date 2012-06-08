@@ -13,10 +13,10 @@ Quick Start
 --------
 
     // mount
-    sshfs.mount user, host, mountpoint, callback
+    sshfs.mount(user, host, mountpoint, callback);
     
     // unmount
-    sshfs.umount mountpoint, force, callback
+    sshfs.umount(mountpoint, force, callback);
 
 Running Tests
 --------
