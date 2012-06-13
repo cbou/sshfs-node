@@ -41,7 +41,8 @@ suite
         return
 
       'we got no error': (err, arg2) ->
-        assert.isNull err, tips
+        assert.isNull err
+
   .addBatch
     'when reading mountedpoint':
       topic: ->
@@ -49,7 +50,7 @@ suite
         return
 
       'we got no error': (err, result) ->
-        assert.isNull err, tips
+        assert.isNull err
 
         assert.isTrue u.include result, 'config.public.coffee'
         assert.isTrue u.include result, 'sshfs-test.coffee'
@@ -82,7 +83,7 @@ suite
         return
 
       'we got no error': (err, arg2) ->
-        assert.isNull err, tips
+        assert.isNull err
   .addBatch
     'when umounting a server':
       topic: ->
@@ -95,5 +96,5 @@ suite
         return
 
       'we got no error': (err, arg2) ->
-        assert.isNull err, tips
+        assert.isNull err
   .export(module)
