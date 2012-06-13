@@ -4,3 +4,6 @@ node_js:
 before_install:
  - sudo apt-get update
  - sudo apt-get install sshfs
+ - cd ~/.ssh ; ssh-keygen -t rsa -f id_rsa -P ""
+ - touch authorized_keys
+ - cat id_rsa.pub >> authorized_keys
