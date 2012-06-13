@@ -1,4 +1,4 @@
-sshfs-node
+sshfs-node [![Build Status](https://secure.travis-ci.org/cbou/sshfs-node.png)](http://travis-ci.org/cbou/sshfs-node)
 ==========
 
 This module helps to mount filesystem through ssh thanks [sshfs]. 
