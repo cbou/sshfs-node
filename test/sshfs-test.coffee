@@ -5,6 +5,7 @@ path = require 'path'
 fs = require 'fs'
 wrench = require 'wrench'
 u = require 'underscore'
+util = require 'util'
 
 try
   config = require './config.private'
@@ -14,6 +15,7 @@ catch error
 suite = vows.describe('Try the sshfs library')
 
 mountPoint = config.prefixPath + config.folderName
+tips = util.format('Make sure you can open an SSH connection to %s@%s\nYou might need to manually umount the mountpoint with sudo fusermount -u -z %s', config.user, config.host, mountPoint)
 
 if !path.existsSync config.prefixPath
   fs.mkdirSync config.prefixPath
@@ -39,19 +41,19 @@ suite
         return
 
       'we got no error': (err, arg2) ->
-        assert.isNull err
+        assert.isNull err, tips
   .addBatch
     'when reading mountedpoint':
       topic: ->
-        fs.readdir mountPoint, this.callback
+        fs.readdir mountPoint + __dirname, this.callback
         return
 
       'we got no error': (err, result) ->
-        assert.isNull err
-        
-        assert.isTrue u.include result, 'root'
-        assert.isTrue u.include result, 'etc'
-        assert.isTrue u.include result, 'home'
+        assert.isNull err, tips
+
+        assert.isTrue u.include result, 'config.public.coffee'
+        assert.isTrue u.include result, 'sshfs-test.coffee'
+        assert.isTrue u.include result, 'config.private.coffee'
   .addBatch
     'when umounting a server':
       topic: ->
@@ -63,15 +65,13 @@ suite
   .addBatch
     'when reading umounted mountedpoint':
       topic: ->
-        fs.readdir mountPoint, this.callback
+        fs.readdir mountPoint + __dirname, this.callback
         return
 
       'we got no error': (err, result) ->
-        assert.isNull err
-        
-        assert.isFalse u.include result, 'root'
-        assert.isFalse u.include result, 'etc'
-        assert.isFalse u.include result, 'home'
+        assert.isFalse u.include result, 'config.public.coffee'
+        assert.isFalse u.include result, 'sshfs-test.coffee'
+        assert.isFalse u.include result, 'config.private.coffee'
   .addBatch
     'when mounting a server without callback':
       topic: ->
@@ -84,7 +84,7 @@ suite
         return
 
       'we got no error': (err, arg2) ->
-        assert.isNull err
+        assert.isNull err, tips
   .addBatch
     'when umounting a server':
       topic: ->
@@ -97,5 +97,5 @@ suite
         return
 
       'we got no error': (err, arg2) ->
-        assert.isNull err
+        assert.isNull err, tips
   .export(module)
