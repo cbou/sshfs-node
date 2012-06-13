@@ -45,17 +45,17 @@ suite
   .addBatch
     'when umounting a server':
       topic: ->
-        sshfs.umount prefixPath + mountPoint, this.callback
+        sshfs.umount prefixPath + mountPoint, true, this.callback
         return
 
       'we got no error': (err, arg2) ->
         assert.isNull err
   .addBatch
-    'when reading mountedpoint':
+    'when reading umounted mountedpoint':
       topic: ->
         fs.readdir prefixPath + mountPoint, this.callback
         return
-        
+
       'we got no error': (err, result) ->
         assert.isNull err
         
