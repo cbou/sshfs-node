@@ -72,4 +72,30 @@ suite
         assert.isFalse u.include result, 'root'
         assert.isFalse u.include result, 'etc'
         assert.isFalse u.include result, 'home'
+  .addBatch
+    'when mounting a server without callback':
+      topic: ->
+        callback = this.callback
+
+        sshfs.mount config.user, config.host, mountPoint
+        setTimeout ->
+          callback()
+        , 1000
+        return
+
+      'we got no error': (err, arg2) ->
+        assert.isNull err
+  .addBatch
+    'when umounting a server':
+      topic: ->
+        callback = this.callback
+
+        sshfs.umount mountPoint, true
+        setTimeout ->
+          callback()
+        , 1000
+        return
+
+      'we got no error': (err, arg2) ->
+        assert.isNull err
   .export(module)
