@@ -53,7 +53,6 @@ suite
 
         assert.isTrue u.include result, 'config.public.coffee'
         assert.isTrue u.include result, 'sshfs-test.coffee'
-        assert.isTrue u.include result, 'config.private.coffee'
   .addBatch
     'when umounting a server':
       topic: ->
@@ -71,7 +70,6 @@ suite
       'we got no error': (err, result) ->
         assert.isFalse u.include result, 'config.public.coffee'
         assert.isFalse u.include result, 'sshfs-test.coffee'
-        assert.isFalse u.include result, 'config.private.coffee'
   .addBatch
     'when mounting a server without callback':
       topic: ->
