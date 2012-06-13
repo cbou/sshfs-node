@@ -11,6 +11,7 @@
       "vows" : ">= 0.6.2"
     , "wrench" : ">= 1.3.7"
     , "underscore" : ">= 1.3.1"
+    , "coffee-script" : ">= 1.3.3"
   },
   "keywords": ["sshfs", "filesystem", "ssh", "remote"],
   "repository": {
@@ -19,6 +20,6 @@
   },
   "main": "index",
   "license": "MIT",
-  "scripts": { "test": "./node_modules/vows/bin/vows test/*-test.js --spec" },
+  "scripts": { "test": "./node_modules/vows/bin/vows test/*-test.coffee --spec" },
   "engines": { "node": ">= 0.6.8 < 0.7.0" }
 }
