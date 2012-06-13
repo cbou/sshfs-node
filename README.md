@@ -1,7 +1,8 @@
 sshfs-node
 ==========
 
-This module helps to mount filesystem through ssh thanks [sshfs].
+This module helps to mount filesystem through ssh thanks [sshfs]. 
+It only works with public and private keys, not with password.
 
 
 Installation
