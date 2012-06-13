@@ -6,26 +6,36 @@ fs = require 'fs'
 wrench = require 'wrench'
 u = require 'underscore'
 
+try
+  config = require './config.private'
+catch error
+  config = require './config.public'
+
 suite = vows.describe('Try the sshfs library')
 
-validUser = 'ec2-user'
-validHost = 'big-bazar.fr'
-mountPoint = '/mountpoint-test'
+mountPoint = config.prefixPath + config.folderName
 
-prefixPath = '/tmp/sshfs'
+if !path.existsSync config.prefixPath
+  fs.mkdirSync config.prefixPath
 
-if !path.existsSync prefixPath
-  fs.mkdirSync prefixPath
-
-if path.existsSync prefixPath + mountPoint
-  wrench.rmdirSyncRecursive prefixPath + mountPoint
-fs.mkdirSync prefixPath + mountPoint
+if !path.existsSync mountPoint
+  fs.mkdirSync mountPoint
 
 suite
   .addBatch
+    'force to unmount':
+      topic: ->
+        callback = this.callback
+        sshfs.umount mountPoint, true, this.callback
+        return
+
+      'we do not track errors here': (err, arg2) ->
+        assert.isNull null
+
+  .addBatch
     'when mounting a server':
       topic: ->
-        sshfs.mount validUser, validHost, prefixPath + mountPoint, this.callback
+        sshfs.mount config.user, config.host, mountPoint, this.callback
         return
 
       'we got no error': (err, arg2) ->
@@ -33,7 +43,7 @@ suite
   .addBatch
     'when reading mountedpoint':
       topic: ->
-        fs.readdir prefixPath + mountPoint, this.callback
+        fs.readdir mountPoint, this.callback
         return
 
       'we got no error': (err, result) ->
@@ -45,7 +55,7 @@ suite
   .addBatch
     'when umounting a server':
       topic: ->
-        sshfs.umount prefixPath + mountPoint, true, this.callback
+        sshfs.umount mountPoint, true, this.callback
         return
 
       'we got no error': (err, arg2) ->
@@ -53,7 +63,7 @@ suite
   .addBatch
     'when reading umounted mountedpoint':
       topic: ->
-        fs.readdir prefixPath + mountPoint, this.callback
+        fs.readdir mountPoint, this.callback
         return
 
       'we got no error': (err, result) ->
