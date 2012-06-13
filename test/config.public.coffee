@@ -1,5 +1,5 @@
 module.exports =
-  user: 'user'
+  user: process.env.USER
   host: 'localhost'
   prefixPath: '/tmp/sshfs'
-  folderName: '/'
+  folderName: ''
