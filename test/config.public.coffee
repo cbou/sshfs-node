@@ -3,3 +3,4 @@ module.exports =
   host: 'localhost'
   prefixPath: '/tmp/sshfs'
   folderName: ''
+  testLog: 'test.log'

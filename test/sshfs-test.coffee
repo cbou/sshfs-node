@@ -12,6 +12,11 @@ try
 catch error
   config = require './config.public'
 
+# Example of ssh.log override
+sshfs.log = (message)->
+  if typeof fs.appendFile == 'function'
+    fs.appendFileSync config.testLog, message, 'utf-8'
+
 suite = vows.describe('Try the sshfs library')
 
 mountPoint = config.prefixPath + config.folderName
