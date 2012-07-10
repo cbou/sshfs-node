@@ -13,21 +13,24 @@
 
 
 
-## mount(user, host, mountpoint, callback)
+## mount(host, mountpoint, options, callback)
 Mounts the host into the host point.
 
- Examples:
+ Option list:
+   * {String} user: name of the user to use (e.g. ec2-user)
+   * {String} identityFile: identity file to use (e.g. ~/.ssh/id_rsa)
 
-    sshfs.mount('ec2-user', '127.0.0.1', '/mnt/ec2', callback)
+ Examples:
+    sshfs.mount('127.0.0.1', '/mnt/ec2', {user: 'ec2-user'}, callback)
 
 
 ### Params: 
 
-* **String** *user* User of the server
-
 * **String** *host* Host of the server
 
 * **String** *mountpoint* Path where host should be mounted
+
+* **Object** *options* An object of options
 
 * **Function** *callback* Callback function with parameters (err)
 
