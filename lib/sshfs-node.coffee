@@ -31,7 +31,7 @@ sshfs = {}
 sshfs.mount = (host, mountpoint, options, callback) ->
   identityOption = ''
   if options && options.identityFile
-    identityOption = util.format '-o %s', options.identityFile
+    identityOption = util.format '-o IdentityFile=%s', options.identityFile
 
   userOption = ''
   if options && options.user
