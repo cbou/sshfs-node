@@ -37,7 +37,9 @@ suite
   .addBatch
     'when mounting a server':
       topic: ->
-        sshfs.mount config.user, config.host, mountPoint, this.callback
+        options = 
+          user: config.user
+        sshfs.mount config.host, mountPoint, options, this.callback
         return
 
       'we got no error': (err, arg2) ->
@@ -75,8 +77,9 @@ suite
     'when mounting a server without callback':
       topic: ->
         callback = this.callback
-
-        sshfs.mount config.user, config.host, mountPoint
+        options = 
+          user: config.user
+        sshfs.mount config.host, mountPoint, options
         setTimeout ->
           callback()
         , 1000

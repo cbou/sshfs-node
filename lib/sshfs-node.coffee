@@ -16,17 +16,29 @@ sshfs = {}
 ###*
  * Mounts the host into the host point.
  *
+ *  Option list:
+ *    * {String} user: name of the user to use (e.g. ec2-user)
+ *    * {String} identityFile: identity file to use (e.g. ~/.ssh/id_rsa)
+ *
  *  Examples:
+ *     sshfs.mount('127.0.0.1', '/mnt/ec2', {user: 'ec2-user'}, callback)
  *
- *     sshfs.mount('ec2-user', '127.0.0.1', '/mnt/ec2', callback)
- *
- * @param {String} user User of the server
  * @param {String} host Host of the server
  * @param {String} mountpoint Path where host should be mounted
+ * @param {Object} options An object of options
  * @param {Function} callback Callback function with parameters (err)
 ###
-sshfs.mount = (user, host, mountpoint, callback) ->
-  command = util.format 'sshfs -o StrictHostKeyChecking=no %s@%s:/ %s', user, host, mountpoint
+sshfs.mount = (host, mountpoint, options, callback) ->
+  identityOption = ''
+  if options && options.identityFile
+    identityOption = util.format '-o %s', options.identityFile
+
+  userOption = ''
+  if options && options.user
+    userOption = util.format '%s@', options.user
+
+  # sshfs -o IdentityFile=~/.ssh/id_rsa user@localhost:/ ~/mnt/localhost_mount/
+  command = util.format 'sshfs %s -o StrictHostKeyChecking=no %s%s:/ %s', identityOption, userOption, host, mountpoint
   sshfs.exec command, callback
     
 ###*
