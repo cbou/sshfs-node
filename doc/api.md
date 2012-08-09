@@ -2,27 +2,19 @@
 
 <!-- Start lib/sshfs-node.coffee -->
 
-
-
 # Sshfs
 
-
-
-
-
-
-
-
 ## mount(host, mountpoint, options, callback)
+
 Mounts the host into the host point.
 
  Option list:
    * {String} user: name of the user to use (e.g. ec2-user)
    * {String} identityFile: identity file to use (e.g. ~/.ssh/id_rsa)
+   * {Boolean} cache: true to activate cache, false if not (default true)
 
  Examples:
     sshfs.mount('127.0.0.1', '/mnt/ec2', {user: 'ec2-user'}, callback)
-
 
 ### Params: 
 
@@ -34,22 +26,13 @@ Mounts the host into the host point.
 
 * **Function** *callback* Callback function with parameters (err)
 
-
-
-
----
-
-
-
-
-
 ## umount(mountpoint, force, callback)
+
 Umounts the mountpoint.
 
  Examples:
 
     sshfs.umount('/mnt/ec2', false, callback)
-
 
 ### Params: 
 
@@ -59,19 +42,8 @@ Umounts the mountpoint.
 
 * **Function** *callback* Callback function with parameters (err)
 
-
-
-
----
-
-
-
-
-
-
-
-
 ## log(message)
+
 Log function
 
 This function can be override to recieve message from sshfs.
@@ -82,18 +54,9 @@ This function can be override to recieve message from sshfs.
       console.log(message);
     }
 
-
 ### Params: 
 
 * **String** *message* The message to log
-
-
-
-
----
-
-
-
 
 <!-- End lib/sshfs-node.coffee -->
 
