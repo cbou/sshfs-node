@@ -25,5 +25,5 @@
     "test": "./node_modules/vows/bin/vows test/*-test.coffee --spec"
     , "documentation": "./node_modules/markdox/bin/markdox -o doc/api.md lib/sshfs-node.coffee"
   },
-  "engines": { "node": ">= 0.6.8 < 0.7.0" }
+  "engines": { "node": ">= 0.6.8" }
 }
