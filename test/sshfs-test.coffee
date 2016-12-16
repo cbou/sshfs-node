@@ -44,6 +44,7 @@ suite
       topic: ->
         options = 
           user: config.user
+          port: config.port
         sshfs.mount config.host, mountPoint, options, this.callback
         return
 
@@ -84,6 +85,7 @@ suite
         callback = this.callback
         options = 
           user: config.user
+          port: config.port
         sshfs.mount config.host, mountPoint, options
         setTimeout ->
           callback()
@@ -106,3 +108,4 @@ suite
       'we got no error': (err, arg2) ->
         assert.isNull err
   .export(module)
+

@@ -12,9 +12,10 @@ Mounts the host into the host point.
    * {String} user: name of the user to use (e.g. ec2-user)
    * {String} identityFile: identity file to use (e.g. ~/.ssh/id_rsa)
    * {Boolean} cache: true to activate cache, false if not (default true)
+   * {Number} port: port number, default if not (e.g. 2222)
 
  Examples:
-    sshfs.mount('127.0.0.1', '/mnt/ec2', {user: 'ec2-user'}, callback)
+    sshfs.mount('127.0.0.1', '/mnt/ec2', {user: 'ec2-user', port: 2222}, callback)
 
 ### Params: 
 

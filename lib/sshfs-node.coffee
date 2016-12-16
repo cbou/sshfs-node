@@ -20,9 +20,10 @@ sshfs = {}
  *    * {String} user: name of the user to use (e.g. ec2-user)
  *    * {String} identityFile: identity file to use (e.g. ~/.ssh/id_rsa)
  *    * {Boolean} cache: true to activate cache, false if not (default true)
+ *    * {Number} port: port number, default if not (e.g. 2222)
  *
  *  Examples:
- *     sshfs.mount('127.0.0.1', '/mnt/ec2', {user: 'ec2-user'}, callback)
+ *     sshfs.mount('127.0.0.1', '/mnt/ec2', {user: 'ec2-user', port: 2222}, callback)
  *
  * @param {String} host Host of the server
  * @param {String} mountpoint Path where host should be mounted
@@ -42,10 +43,14 @@ sshfs.mount = (host, mountpoint, options, callback) ->
   if options && options.cache == false
     cacheOption = '-o cache=no'
 
+  portOption = ''
+  if options && options.port
+    portOption = util.format '-o port=%d', options.port
+
   # sshfs -o IdentityFile=~/.ssh/id_rsa user@localhost:/ ~/mnt/localhost_mount/
-  command = util.format 'sshfs %s %s -o StrictHostKeyChecking=no %s%s:/ %s', identityOption, cacheOption, userOption, host, mountpoint
+  command = util.format 'sshfs %s %s %s -o StrictHostKeyChecking=no %s%s:/ %s', identityOption, cacheOption, portOption, userOption, host, mountpoint
   sshfs.exec command, callback
-    
+
 ###*
  * Umounts the mountpoint.
  *
