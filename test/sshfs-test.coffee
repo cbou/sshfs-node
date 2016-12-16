@@ -42,7 +42,7 @@ suite
   .addBatch
     'when mounting a server':
       topic: ->
-        options = 
+        options =
           user: config.user
           port: config.port
         sshfs.mount config.host, mountPoint, options, this.callback
@@ -83,7 +83,7 @@ suite
     'when mounting a server without callback':
       topic: ->
         callback = this.callback
-        options = 
+        options =
           user: config.user
           port: config.port
         sshfs.mount config.host, mountPoint, options
@@ -108,4 +108,3 @@ suite
       'we got no error': (err, arg2) ->
         assert.isNull err
   .export(module)
-
