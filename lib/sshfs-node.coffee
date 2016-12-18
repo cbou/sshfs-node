@@ -49,7 +49,7 @@ sshfs.mount = (host, mountpoint, options, callback) ->
     portOption = util.format '-o port=%d', options.port
 
   pathOption = '/'
-  if options && (typeof options.path === 'string')
+  if options && (typeof(options.path) == 'string')
     pathOption = util.format '%s', options.path
 
   # sshfs -o IdentityFile=~/.ssh/id_rsa user@localhost:"/" "~/mnt/localhost_mount/"
