@@ -48,7 +48,7 @@ sshfs.mount = (host, mountpoint, options, callback) ->
   if options && options.port
     portOption = util.format '-o port=%d', options.port
 
-  pathOption = ''
+  pathOption = '/'
   if options && options.path
     pathOption = util.format '%s', options.path
 
