@@ -21,9 +21,11 @@
   },
   "main": "index",
   "license": "MIT",
-  "scripts": { 
+  "scripts": {
     "test": "./node_modules/vows/bin/vows test/*-test.coffee --spec"
     , "documentation": "./node_modules/markdox/bin/markdox -o doc/api.md lib/sshfs-node.coffee"
   },
-  "engines": { "node": ">= 0.6.8" }
+  "engines": {
+    "node": ">= 4.6.2"
+  }
 }

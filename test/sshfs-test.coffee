@@ -22,10 +22,10 @@ suite = vows.describe('Try the sshfs library')
 mountPoint = config.prefixPath + config.folderName
 tips = util.format('Make sure you can open an SSH connection to %s@%s\nYou might need to manually umount the mountpoint with sudo fusermount -u -z %s', config.user, config.host, mountPoint)
 
-if !path.existsSync config.prefixPath
+if !fs.existsSync config.prefixPath
   fs.mkdirSync config.prefixPath
 
-if !path.existsSync mountPoint
+if !fs.existsSync mountPoint
   fs.mkdirSync mountPoint
 
 suite
@@ -42,8 +42,9 @@ suite
   .addBatch
     'when mounting a server':
       topic: ->
-        options = 
+        options =
           user: config.user
+          port: config.port
         sshfs.mount config.host, mountPoint, options, this.callback
         return
 
@@ -82,8 +83,9 @@ suite
     'when mounting a server without callback':
       topic: ->
         callback = this.callback
-        options = 
+        options =
           user: config.user
+          port: config.port
         sshfs.mount config.host, mountPoint, options
         setTimeout ->
           callback()
